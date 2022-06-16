@@ -4,7 +4,7 @@ const promptly = require('promptly')
 const data = require('unicode-emoji-json')
 if (!lang) {
   const files = fs.readdirSync('dist')
-  const langs = files.map(tag => tag.match(/-(.+)\./)[1])
+  const langs = files.map((tag) => tag.match(/-(.+)\./)[1])
   console.log(`Please provide a langage tag: ${langs.join(', ')}`)
 } else {
   start()
@@ -15,7 +15,7 @@ async function start() {
   const file = require(`../${path}`)
   for (const emoji in file) {
     const kws = file[emoji]
-    
+
     if (needsWork(kws)) {
       const hint = kws.length > 0 ? `: ${kws.join(', ')}` : `(${data[emoji]['name']})`
       console.log(`${emoji}${hint}`)

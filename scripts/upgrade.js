@@ -27,7 +27,7 @@ async function getKeywords(key, name) {
   let text = null
   while (text !== '') {
     text = await promptly.prompt(`Enter a keyword for ${key}(${name}), leave it blank to go to the next one.`, {
-      default: ''
+      default: '',
     })
     if (text) keywords.push(text)
   }
