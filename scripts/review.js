@@ -9,7 +9,7 @@ if (!lang) {
   start()
 }
 
-async function start() {
+async function start () {
   const path = `dist/emoji-${lang}.json`
   const file = require(`../${path}`)
   for (const emoji in file) {
