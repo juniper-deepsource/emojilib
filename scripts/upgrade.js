@@ -3,7 +3,7 @@ const files = fs.readdirSync('dist')
 const data = require('unicode-emoji-json')
 const promptly = require('promptly')
 
-async function upgrade() {
+async function upgrade () {
   for (const path of files) {
     const fullPath = `dist/${path}`
     console.log(`checking ${fullPath}`)
@@ -13,7 +13,7 @@ async function upgrade() {
     for (const key in data) {
       if (Object.keys(content).indexOf(key) < 0) {
         notFound.push(key)
-        content[key] = await getKeywords(key, data[key]['name'])
+        content[key] = await getKeywords(key, data[key].name)
         console.log(`[saved] ${key}: ${content[key].join(', ')}\n`)
         fs.writeFileSync(`./${fullPath}`, JSON.stringify(content, null, 2))
       }
@@ -22,7 +22,7 @@ async function upgrade() {
   }
 }
 
-async function getKeywords(key, name) {
+async function getKeywords (key, name) {
   const keywords = [name.replace(/_/g, ' ')]
   let text = null
   while (text !== '') {

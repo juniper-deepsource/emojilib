@@ -1,7 +1,7 @@
 const fs = require('fs')
 const https = require('https')
 const VARIATION_16 = String.fromCodePoint(0xfe0f)
-const basefilePath = require('../package.json')['main']
+const basefilePath = require('../package.json').main
 
 const lang = process.argv[2]
 const cldrLang = process.argv[3]
@@ -13,8 +13,8 @@ Language code required, which should be made of [primary language subtag]-[regio
 For example, use en-GB for English within United Kingdom, and use zh-TW for Chinese used in Taiwan.\nSee https://en.wikipedia.org/wiki/IETF_language_tag for more information.
 `)
 
-  const directoryEndpoint = `https://api.github.com/repos/unicode-org/cldr-staging/contents/production/common/annotations`
-  https.get(directoryEndpoint, {headers: {'User-Agent': 'muan/emojilib#i18n'}}, function(response) {
+  const directoryEndpoint = 'https://api.github.com/repos/unicode-org/cldr-staging/contents/production/common/annotations'
+  https.get(directoryEndpoint, { headers: { 'User-Agent': 'muan/emojilib#i18n' } }, function (response) {
     let chunk = ''
     response.on('data', data => (chunk += data))
     response.on('end', () => {
@@ -31,9 +31,9 @@ For example, use en-GB for English within United Kingdom, and use zh-TW for Chin
   }
 }
 
-function createFileFromCldr() {
+function createFileFromCldr () {
   const url = `https://api.github.com/repos/unicode-org/cldr-staging/contents/production/common/annotations/${cldrLang}.xml`
-  https.get(url, {headers: {'User-Agent': 'muan/emojilib#i18n'}}, function(response) {
+  https.get(url, { headers: { 'User-Agent': 'muan/emojilib#i18n' } }, function (response) {
     let chunk = ''
     response.on('data', data => (chunk += data))
     response.on('end', () => {
@@ -47,22 +47,22 @@ function createFileFromCldr() {
   })
 }
 
-function parse(content) {
+function parse (content) {
   const parser = require('xml2json')
   const data = require(`../${basefilePath}`)
   Object.keys(data).forEach(k => (data[k] = []))
-  
+
   for (const group of JSON.parse(parser.toJson(content)).ldml.annotations.annotation) {
     const emoji = group.cp
     const emojiWithOptionalVariation16 = data[emoji] ? emoji : emoji + VARIATION_16
     if (!data[emojiWithOptionalVariation16]) continue
 
     if (group.type === 'tts') {
-      if (!data[emojiWithOptionalVariation16].includes(group['$t'])) {
-        data[emojiWithOptionalVariation16].splice(0, 0, group['$t'])
+      if (!data[emojiWithOptionalVariation16].includes(group.$t)) {
+        data[emojiWithOptionalVariation16].splice(0, 0, group.$t)
       }
     } else {
-      const kws = group['$t'].split(' | ')
+      const kws = group.$t.split(' | ')
       data[emojiWithOptionalVariation16] = data[emojiWithOptionalVariation16].concat(kws)
     }
   }

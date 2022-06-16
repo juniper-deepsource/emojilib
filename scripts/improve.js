@@ -10,18 +10,18 @@ if (!lang) {
   start()
 }
 
-async function start() {
+async function start () {
   const path = `dist/emoji-${lang}.json`
   const file = require(`../${path}`)
   for (const emoji in file) {
     const kws = file[emoji]
-    
+
     if (needsWork(kws)) {
-      const hint = kws.length > 0 ? `: ${kws.join(', ')}` : `(${data[emoji]['name']})`
+      const hint = kws.length > 0 ? `: ${kws.join(', ')}` : `(${data[emoji].name})`
       console.log(`${emoji}${hint}`)
       let kw = null
       while (kw !== '') {
-        kw = await promptly.prompt('Add a keyword:', {default: ''})
+        kw = await promptly.prompt('Add a keyword:', { default: '' })
         if (kw) kws.push(kw)
       }
       if (kws.length >= 1) {
@@ -36,7 +36,7 @@ async function start() {
   }
 }
 
-function needsWork(keywords) {
+function needsWork (keywords) {
   if (keywords.length < 1) return true
   return false
 }
