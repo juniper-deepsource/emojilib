@@ -3,7 +3,7 @@ const lang = process.argv[2]
 const promptly = require('promptly')
 if (!lang) {
   const files = fs.readdirSync('dist')
-  const langs = files.map(tag => tag.match(/-(.+)\./)[1])
+  const langs = files.map((tag) => tag.match(/-(.+)\./)[1])
   console.log(`Please provide a langage tag: ${langs.join(', ')}`)
 } else {
   start()

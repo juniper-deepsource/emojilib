@@ -25,12 +25,12 @@ $ npm run upgrade
 
 checking dist/emoji-en-US.json
 Enter a keyword for 🪤(mouse trap), leave it blank to go to the next one. cheese
-Enter a keyword for 🪤(mouse trap), leave it blank to go to the next one. 
+Enter a keyword for 🪤(mouse trap), leave it blank to go to the next one.
 [saved] 🪤: mouse trap, cheese
 
 Enter a keyword for 🪣(bucket), leave it blank to go to the next one. water
 Enter a keyword for 🪣(bucket), leave it blank to go to the next one. container
-Enter a keyword for 🪣(bucket), leave it blank to go to the next one. 
+Enter a keyword for 🪣(bucket), leave it blank to go to the next one.
 [saved] 🪣: bucket, water, container
 
 added 2: 🪤, 🪣.
@@ -62,9 +62,9 @@ Options: af, am, ar, ar_SA, as, ast, az, be, bg, bn, br, bs, ca, ccp, ceb, chr, 
 ```
 $ npm run improve en-US
 
-😀: 
+😀:
 Add a keyword: happy
-Add a keyword: 
+Add a keyword:
 [saved] 😀: happy
 ```
 

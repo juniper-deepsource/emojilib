@@ -14,11 +14,11 @@ For example, use en-GB for English within United Kingdom, and use zh-TW for Chin
 `)
 
   const directoryEndpoint = `https://api.github.com/repos/unicode-org/cldr-staging/contents/production/common/annotations`
-  https.get(directoryEndpoint, {headers: {'User-Agent': 'muan/emojilib#i18n'}}, function(response) {
+  https.get(directoryEndpoint, {headers: {'User-Agent': 'muan/emojilib#i18n'}}, function (response) {
     let chunk = ''
-    response.on('data', data => (chunk += data))
+    response.on('data', (data) => (chunk += data))
     response.on('end', () => {
-      const langs = JSON.parse(chunk).map(g => g.name.split('.')[0])
+      const langs = JSON.parse(chunk).map((g) => g.name.split('.')[0])
       console.log(`CLDR lang required.\nOptions: ${langs.join(', ')}`)
     })
   })
@@ -33,9 +33,9 @@ For example, use en-GB for English within United Kingdom, and use zh-TW for Chin
 
 function createFileFromCldr() {
   const url = `https://api.github.com/repos/unicode-org/cldr-staging/contents/production/common/annotations/${cldrLang}.xml`
-  https.get(url, {headers: {'User-Agent': 'muan/emojilib#i18n'}}, function(response) {
+  https.get(url, {headers: {'User-Agent': 'muan/emojilib#i18n'}}, function (response) {
     let chunk = ''
-    response.on('data', data => (chunk += data))
+    response.on('data', (data) => (chunk += data))
     response.on('end', () => {
       const fileContent = Buffer.from(JSON.parse(chunk).content, 'base64')
       const content = parse(fileContent)
@@ -50,8 +50,8 @@ function createFileFromCldr() {
 function parse(content) {
   const parser = require('xml2json')
   const data = require(`../${basefilePath}`)
-  Object.keys(data).forEach(k => (data[k] = []))
-  
+  Object.keys(data).forEach((k) => (data[k] = []))
+
   for (const group of JSON.parse(parser.toJson(content)).ldml.annotations.annotation) {
     const emoji = group.cp
     const emojiWithOptionalVariation16 = data[emoji] ? emoji : emoji + VARIATION_16
